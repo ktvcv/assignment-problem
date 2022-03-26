@@ -1,0 +1,8 @@
+docker build -t node-volume .
+
+docker run -p 8000:80 -d --name node-volume-container --rm node-volume
+
+data is deleted after removing the container, not after stopping
+
+named volumes:
+docker run -p 8000:80 -d --name node-volume-container -v feedback:/app/feedback --rm node-volume

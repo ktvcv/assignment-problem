@@ -1,7 +1,7 @@
 docker build . -t python-app/latest
 ocker images
 
-docker run -it --name python-app-container --rm  python-app/latest:latest
+docker run -it --name python-app-container --rm  python-app/latest
 
 docker ps
 
