@@ -1,1 +1,10 @@
 docker build . -t python-app/latest
+ocker images
+
+docker run -it --name python-app-container --rm  python-app/latest:latest
+
+docker ps
+
+docker stop python-app-container
+
+docker container prune
