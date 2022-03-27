@@ -4,5 +4,11 @@ docker run -p 8000:80 -d --name node-volume-container --rm node-volume
 
 data is deleted after removing the container, not after stopping
 
+anonymous volume:// can not use to transfer data 
+docker run -p 8000:80 -d --name node-volume-container -v /app/node_modules --rm node-volume
+
 named volumes:
 docker run -p 8000:80 -d --name node-volume-container -v feedback:/app/feedback --rm node-volume
+
+add bind mount:
+docker run -p 8000:80 -d --name node-volume-container -v "/home/digis/Documents/assignment-problem/data-volumes:/app" -v feedback:/app/feedback -v /app/node_modules --rm node-volume
