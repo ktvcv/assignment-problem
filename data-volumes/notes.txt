@@ -12,3 +12,12 @@ docker run -p 8000:80 -d --name node-volume-container -v feedback:/app/feedback 
 
 add bind mount:
 docker run -p 8000:80 -d --name node-volume-container -v "/home/digis/Documents/assignment-problem/data-volumes:/app" -v feedback:/app/feedback -v /app/node_modules --rm node-volume
+
+read only volume
+docker run -p 8000:80 -d --name node-volume-container -v "/home/digis/Documents/assignment-problem/data-volumes:/app:ro" -v feedback:/app/feedback -v /app/node_modules --rm node-volume
+
+docker run -p 8000:8000  --env PORT=8000 -d --name node-volume-container -v "/home/digis/Documents/assignment-problem/data-volumes:/app" -v feedback:/app/feedback -v /app/node_modules --rm node-app
+docker run -p 8000:8000  --env-file ./.env -d --name node-volume-container -v "/home/digis/Documents/assignment-problem/data-volumes:/app" -v feedback:/app/feedback -v /app/node_modules --rm node-app
+
+docker build -t node-app --build-arg DEFAULT_PORT=8000 .
+
