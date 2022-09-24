@@ -1,0 +1,13 @@
+docker run --name favorites -d --rm -p 3000:3000  favorites-node 
+
+docker ps
+
+sudo systemctl start mongod
+
+docker run --name favorites --add-host host.docker.internal:172.17.0.1  --rm -p 3000:3000  favorites-node
+
+docker inspect container mongodb 172.17.0.2
+
+docker run -d --name mongodb --network favorites-net  mongo
+
+docker run --name favorites  --rm -p 3000:3000 --network favorites-net  favorites-node
