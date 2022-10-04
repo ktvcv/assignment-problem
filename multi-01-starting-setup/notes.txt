@@ -1,0 +1,26 @@
+docker run --name favorites -d --rm -p 3000:3000  favorites-node 
+
+docker ps
+
+sudo systemctl start mongod
+
+docker run --name favorites --add-host host.docker.internal:172.17.0.1  --rm -p 3000:3000  favorites-node
+
+docker inspect container mongodb 172.17.0.2
+
+docker create network node-app
+
+docker run -d --name mongodb --network favorites-net  -p 27017:27017 mongo
+
+docker run --name favorites  --rm -p 3000:3000 --network favorites-net  favorites-node
+
+docker run --name favorites-react  --rm -p 3000:3000 --it goals-react
+
+
+app
+
+docker run -d --rm --name mongodb --network goals-net -v data:/data/db -e MONGO_INITDB_ROOT_USERNAME=viktoriia -e MONGO_INITDB_ROOT_PASSWORD=88888888 mongo
+
+docker run --name goals-node --rm  -p 8081:8081 --network goals-net -v logs:/app/logs -v  /home/digis/Documents/study/docker-start/multi-01-starting-setup/backend:/app -e MONGODB_USERNAME=viktoriia -e MONGODB_PASSWORD=88888888 -v /app/node-modules goals-node
+
+docker run --name goals-react --rm -p 3000:3000  -v /home/digis/Documents/study/docker-start/multi-01-starting-setup/frontend/src/components:/app/src --it goals-react
