@@ -1,0 +1,52 @@
+# automaticaly create network
+version: '3.8'
+services:
+  mongodb:
+    image: "mongo"
+    container_name: mongodb
+    volumes:
+      - mongodb:/data/db
+    # environment: 
+    #   - MONGO_INITDB_ROOT_USERNAME=viktoriia
+    #   - MONGO_INITDB_ROOT_PASSWORD=88888888
+
+    env_file:
+      - ./env/mongo.env    
+  backend:
+    #image: 'node-goal'
+    #build: ./backend
+    build: 
+      context: ./backend
+      dockerfile:  Dockerfile
+    ports:
+      - '8081:8081'
+    volumes: 
+      - logs:/app/logs
+      - ./backend:/app
+      - /app/node-modules  
+    env-file:
+      - ./env/backend.env
+    depends-on:
+      - mongodb
+
+  frontend:
+    build: 
+      context: ./frontend
+    ports: 
+        - '3000:3000'
+    volumes:
+        - ./frontend/src:/app/src
+    stdin_open: true
+    tty: true
+    depends-on:
+      - backend            
+
+
+
+  #frontend:
+volumes:
+  mongodb:
+  logs:
+
+  # docker-compose down -v
+
